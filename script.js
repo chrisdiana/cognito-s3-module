@@ -4,11 +4,11 @@ import { getFile, uploadFile } from './modules/s3.js';
 
 // AWS COGNITO CONFIG
 const config = {
-  userPoolId: 'us-east-1_sCBy94ExW',
-  clientId: '6cchsjlqa0mo6flfvna2fuldf1',
-	identityPoolId: 'us-east-1:a8e91859-0f59-41fa-93ac-84c337c44da1',
-  identityPoolUrl: 'cognito-idp.us-east-1.amazonaws.com/us-east-1_sCBy94ExW',
-	region: 'us-east-1',
+  userPoolId: '',
+  clientId: '',
+	identityPoolId: '',
+  identityPoolUrl: '',
+	region: '',
 };
 
 var app = new Vue({
@@ -19,11 +19,10 @@ var app = new Vue({
     config,
     auth: null,
     credentials: {
-      email: 'XXXXXXXXXX',
+      email: '',
       password: '',
     },
-    bucket: 'datumbased-k-means-test',
-    //bucket: 'datumbased-standard-ml-kmeans-backend-s3data-dev',
+    bucket: '',
     key: null,
     services: {},
   },
