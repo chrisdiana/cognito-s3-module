@@ -1,0 +1,26 @@
+{
+  "name": "cognito-s3-module",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "start": "http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chrisdiana/cognito-s3-module.git"
+  },
+  "author": "Chris Diana",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/chrisdiana/cognito-s3-module/issues"
+  },
+  "homepage": "https://github.com/chrisdiana/cognito-s3-module#readme",
+  "dependencies": {
+    "http-server": "^0.12.1"
+  }
+}
