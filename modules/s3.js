@@ -18,7 +18,7 @@ export function uploadFile(service, key, bucket, file) {
   return new Promise((resolve, reject) => {
     service.upload({
       Bucket: bucket,
-      Key: keyPrefix + file.name,
+      Key: key,
       Body: file,
     }, function(error, data) {
       if (error) {

@@ -1,15 +1,6 @@
 import { authenticate, getCredentials } from './modules/authenticate-cognito.js';
 import { getFile, uploadFile } from './modules/s3.js';
-
-
-// AWS COGNITO CONFIG
-const config = {
-  userPoolId: '',
-  clientId: '',
-	identityPoolId: '',
-  identityPoolUrl: '',
-	region: '',
-};
+import config from './config.js';
 
 var app = new Vue({
   el: '#app',
@@ -35,7 +26,7 @@ var app = new Vue({
             .then(data => {
               const sub = AWS.config.credentials.identityId;
               // AWS BUCKET OBJECT KEY
-              this.key = `users/${sub}/Mall_Customers.csv`;
+              this.key = `users/${sub}/`;
               this.services.s3 = new AWS.S3();
             })
             .catch(error => { this.error = error; });
@@ -48,7 +39,7 @@ var app = new Vue({
       uploadFile(this.services.s3, this.key, this.bucket, this.file)
         .then(data => {
           console.log(data);
-          this.file = null;
+          this.file = data;
         })
         .catch(error => { this.error = error; });
     },
