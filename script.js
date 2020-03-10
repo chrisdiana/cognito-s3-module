@@ -31,11 +31,14 @@ var app = new Vue({
       authenticate(this.credentials, this.config)
         .then(auth => {
           this.auth = auth;
-          const sub = AWS.config.credentials.identityId;
-
-          // AWS BUCKET OBJECT KEY
-          this.key = `users/${sub}/`;
-          this.services.s3 = new AWS.S3();
+          getCredentials()
+            .then(data => {
+              const sub = AWS.config.credentials.identityId;
+              // AWS BUCKET OBJECT KEY
+              this.key = `users/${sub}/Mall_Customers.csv`;
+              this.services.s3 = new AWS.S3();
+            })
+            .catch(error => { this.error = error; });
         })
         .catch(error => { this.error = error; });
     },
