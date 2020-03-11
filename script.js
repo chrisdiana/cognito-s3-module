@@ -10,10 +10,10 @@ var app = new Vue({
     config,
     auth: null,
     credentials: {
-      email: '',
-      password: '',
+      email: config.email || '',
+      password: config.password || '',
     },
-    bucket: '',
+    bucket: config.bucket || '',
     key: null,
     services: {},
   },
@@ -26,7 +26,7 @@ var app = new Vue({
             .then(data => {
               const sub = AWS.config.credentials.identityId;
               // AWS BUCKET OBJECT KEY
-              this.key = `users/${sub}/`;
+              this.key = config.key.replace('<sub>', sub);
               this.services.s3 = new AWS.S3();
             })
             .catch(error => { this.error = error; });
@@ -36,7 +36,7 @@ var app = new Vue({
     uploadFiles(e) {
       this.file = e.target.files[0];
       this.key = this.key + this.file.name;
-      uploadFile(this.services.s3, this.key, this.bucket, this.file)
+      uploadFile(this.services.s3, this.key, this.bucket, this.file, true)
         .then(data => {
           console.log(data);
           this.file = data;

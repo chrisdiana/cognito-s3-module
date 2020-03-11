@@ -14,13 +14,19 @@ export function getFile(service, key, bucket) {
   });
 }
 
-export function uploadFile(service, key, bucket, file) {
+export function uploadFile(service, key, bucket, file, encryption) {
   return new Promise((resolve, reject) => {
-    service.upload({
+    const obj = {
       Bucket: bucket,
       Key: key,
       Body: file,
-    }, function(error, data) {
+    };
+
+    if(encryption) {
+      obj['ServerSideEncryption'] = 'AES256';
+    }
+
+    service.upload(obj, function(error, data) {
       if (error) {
         reject(error, data);
       } else {
