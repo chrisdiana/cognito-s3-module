@@ -36,3 +36,15 @@ export function uploadFile(service, key, bucket, file, encryption) {
   });
 }
 
+export function getList(service, params) {
+  return new Promise((resolve, reject) => {
+    service.listObjectsV2(params,
+      function(error, data) {
+        if (error) {
+          reject(error);
+        } else {
+          resolve(data);
+        }
+    });
+  });
+}

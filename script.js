@@ -1,5 +1,5 @@
 import { authenticate, getCredentials } from './modules/authenticate-cognito.js';
-import { getFile, uploadFile } from './modules/s3.js';
+import { getFile, getList, uploadFile } from './modules/s3.js';
 import { triggerLambda } from './modules/lambda.js';
 import config from './config.js';
 
@@ -58,6 +58,21 @@ var app = new Vue({
         .then(data => {
           console.log(data);
           this.file = data;
+          this.success = data;
+        })
+        .catch(error => { this.error = error; });
+    },
+    getObjectsList() {
+      const sub = AWS.config.credentials.identityId;
+      const params = {};
+      params['Bucket'] = this.bucket;
+      params['StartAfter'] = this.key.replace('<sub>', sub);
+      //params['Prefix'] = this.key.replace('<sub>', sub);
+
+      console.log(params);
+      getList(this.services.s3, params)
+        .then(data => {
+          console.log(data);
           this.success = data;
         })
         .catch(error => { this.error = error; });
